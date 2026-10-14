@@ -1,0 +1,4 @@
+{
+    "cmake.sourceDirectory": "/home/fireblade2534/Documents/Code/EcoCar/CarlaTesting/Ros2/ros2_ws/src/carla_control",
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/ros2_ws/build/compile_commands.json"
+}

@@ -1,0 +1,9 @@
+[project]
+name = "carlasimulator"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "carla==0.9.16",
+]

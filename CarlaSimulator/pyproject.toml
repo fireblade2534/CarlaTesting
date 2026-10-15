@@ -6,4 +6,5 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "carla==0.9.16",
+    "roslibpy>=2.1.0",
 ]

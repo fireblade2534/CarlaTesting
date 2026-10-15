@@ -3,6 +3,8 @@ import carla
 import time
 import math
 
+from src.shared import EgoCar
+
 client = carla.Client("127.0.0.1", 2000)
 client.set_timeout(15.0)
 
@@ -16,9 +18,7 @@ collision = None
 collisions = []
 
 try:
-    ego_bp = bp.find("vehicle.lincoln.mkz_2020")
-    ego_bp.set_attribute("role_name", "hero")
-    ego_bp.set_attribute("ros_name", "hero")
+    ego_car = EgoCar(world)
 
     obstacle_bp = bp.find("vehicle.tesla.model3")
 
@@ -31,7 +31,7 @@ try:
         if not ahead:
             continue
 
-        ego = world.try_spawn_actor(ego_bp, spawn)
+        ego = ego_car.try_spawn(world, spawn)
         if ego is None:
             continue
 
@@ -47,23 +47,10 @@ try:
 
     if ego is None or obstacle is None:
         raise RuntimeError("Could not find free spawn locations")
-
-    ego.set_autopilot(False)
-    ego.apply_control(carla.VehicleControl(brake=1.0))
+    
     obstacle.apply_control(carla.VehicleControl(hand_brake=True))
 
-    # ROS 2 RGB camera
-    camera_bp = bp.find("sensor.camera.rgb")
-    camera_bp.set_attribute("ros_name", "front_camera")
-    camera_bp.set_attribute("image_size_x", "640")
-    camera_bp.set_attribute("image_size_y", "480")
-
-    camera = world.spawn_actor(
-        camera_bp,
-        carla.Transform(carla.Location(x=1.5, z=2.2)),
-        attach_to=ego,
-    )
-    camera.enable_for_ros()
+    ego_car.spawn_sensors(world)
 
     # Collision detector for pass/fail evaluation
     collision_bp = bp.find("sensor.other.collision")

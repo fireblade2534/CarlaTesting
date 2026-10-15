@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-ROS_DOMAIN_ID="0"
-ROS_LOCALHOST_ONLY="0"
-RMW_IMPLEMENTATION="rmw_fastrtps_cpp"
-
 exec docker run --rm -it --init \
     --runtime=nvidia \
     --net=host \

@@ -4,7 +4,8 @@
   "workspaceFolder": "/workspace",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
   "runArgs": ["--ipc=host", "--network=host"],
-
+  "postStartCommand": "sh /workspace/.devcontainer/post_start.sh",
+  
   // Browser-based desktop for GUI apps (turtlesim, rviz)
   "features": {
     "ghcr.io/devcontainers/features/desktop-lite:1": {}

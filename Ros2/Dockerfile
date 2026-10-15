@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-kilted-geometry-msgs \
     ros-kilted-diagnostic-msgs \
     ros-kilted-web-video-server \
+    ros-kilted-rosbridge-server \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt/carla_ws/src

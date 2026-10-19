@@ -2,6 +2,11 @@
 set -e
 
 . /opt/ros/kilted/setup.sh
+. /opt/carla_ws/install/setup.sh
+
+if [ -f /workspace/ros2_ws/install/setup.sh ]; then
+    . /workspace/ros2_ws/install/setup.sh
+fi
 
 echo "Starting rosbridge: $(date)" >> /tmp/post_start.log
 

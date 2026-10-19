@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-kilted-ament-cmake \
     ros-kilted-builtin-interfaces \
     ros-kilted-std-msgs \
+    ros-kilted-vision-msgs \
     ros-kilted-geometry-msgs \
     ros-kilted-diagnostic-msgs \
     ros-kilted-web-video-server \
@@ -26,7 +27,12 @@ WORKDIR /opt/carla_ws
 RUN source /opt/ros/kilted/setup.bash && \
     colcon build --packages-select carla_msgs
 
-RUN echo 'source /opt/ros/kilted/setup.bash' >> /root/.bashrc && \
-    echo 'source /opt/carla_ws/install/setup.bash' >> /root/.bashrc
+RUN printf '%s\n' \
+    'source /opt/ros/kilted/setup.bash' \
+    'source /opt/carla_ws/install/setup.bash' \
+    'if [ -f /workspace/ros2_ws/install/setup.bash ]; then' \
+    '    source /workspace/ros2_ws/install/setup.bash' \
+    'fi' \
+    >> /root/.bashrc
 
 WORKDIR /workspace
